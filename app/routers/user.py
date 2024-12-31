@@ -14,7 +14,7 @@ async def task_by_id():
 
 
 @router.post('/create')
-async  def create_user():
+async def create_user():
     pass
 
 
