@@ -62,3 +62,10 @@ async def delete_user(db: Annotated[Session, Depends(get_db)], user_id: int):
         return {'status_code': status.HTTP_200_OK, 'transaction': 'User and associated tasks deleted successfully!'}
     else:
         raise HTTPException(status_code=404, detail="User was not found")
+
+
+@router.get("/user_id/tasks")
+async def tasks_by_user_id(user_id: int,
+                           db: Annotated[Session, Depends(get_db)]):
+    tasks = db.scalars(select(Task).where(Task.user_id == user_id)).all()
+    return tasks
